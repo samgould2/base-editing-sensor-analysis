@@ -144,14 +144,55 @@ Finally, run the cluster command to execute this .sh script by logging into the 
 sbatch /net/bmc-lab2/data/lab/sanchezrivera/samgould/240624San/sensor_extraction_guide_counts.sh
 ``` 
 
-<span style="color:red">You will need to change the part after /sanchezrivera/ to match up with your file path.</span>
+**You will need to change the part after /sanchezrivera/ to match up with your file path.**
 
 ## Step 2: Sensor analysis
+The next step is very similar. You just need to edit another .sh file. The next one is **crispresso_analysis_42nt.sh**:
+
 ![Step 2](images/2.png)
 
+1. This needs to match up with the number of samples you’re running. E.g if you’re config file runs from 1-10, set this to 1-10.
+2. Change it to your email
+3. Change this to the path to your conda env location (using the sensor_lib_sg environment)
+4. cd: Set this to match up with the directory where your sequencing data is stored.
+/net/bmc-lab2/data/lab/sanchezrivera/your_folder_name
+5. config: set this to match up with your config file name with the prefix “./”
+6. Change the library file in the last line: this needs to match up with the name that you’ve given to the file.
+
+Once this is done, add this (1) **crispresso_analysis_42nt.sh** to your sequencing folder, along with (2) **crispresso_analysis_w_qwc_42nt.py**
+
+Finally, run the cluster command to execute this .sh script by logging into the cluster and running the command. For example: 
+
+```
+sbatch /net/bmc-lab2/data/lab/sanchezrivera/samgould/240624San/crispresso_analysis_42nt.sh
+``` 
+
+**You will need to change the part after /sanchezrivera/ to match up with your file path.**
+
 ## Step 3: Sensor analysis aggregation
+Same process as above. This part aggregates the crispresso data into a single dataframe for each sample. This time edit **crispresso_analysis_aggregtion.sh**:
+
 ![Step 3](images/3.png)
 
+Once this is done, add this (1) **crispresso_analysis_aggregation_42nt.sh** to your sequencing folder, along with (2) **crispresso_analysis_aggregation_42nt.py** and (3) **crispresso_quant_blank.csv**.
+
+**NOTE: THIS WILL FAIL UNLESS YOU ADD crispresso_quant_blank.csv** to your folder
+
+Finally, run the cluster command to execute this .sh script by logging into the cluster and running the command. For example: 
+
+```
+sbatch /net/bmc-lab2/data/lab/sanchezrivera/samgould/240624San/crispresso_analysis_aggregation_42nt.sh
+``` 
+
+**You will need to change the part after /sanchezrivera/ to match up with your file path.**
+
 ## Post-processing
+
+After everything runs, you will have your processed data stored in the folder that you created:
+
+1. classification – contains information
+2. confusion_mats
+3. counts
+4. crispresso
 
 ## Addendum: MAGeCK

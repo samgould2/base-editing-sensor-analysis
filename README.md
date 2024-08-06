@@ -122,7 +122,7 @@ You need to edit:
 
 1. This needs to match up with the number of samples you’re running. E.g if you’re config file runs from 1-10, set this to 1-10.
 2. Change it to your email
-3. Change this to the path to your conda env location (using the sensor_lib_sg environment)
+3. Change this to the path to your conda env location (using the **sensor_lib_sg** environment)
 4. cd: Set this to match up with the directory where your sequencing data is stored.
 /net/bmc-lab2/data/lab/sanchezrivera/your_folder_name
 5. config: set this to match up with your config file name with the prefix “./”
@@ -153,7 +153,7 @@ The next step is very similar. You just need to edit another .sh file. The next 
 
 1. This needs to match up with the number of samples you’re running. E.g if you’re config file runs from 1-10, set this to 1-10.
 2. Change it to your email
-3. Change this to the path to your conda env location (using the sensor_lib_sg environment)
+3. Change this to the path to your conda env location (using the **crispresso_env** environment)
 4. cd: Set this to match up with the directory where your sequencing data is stored.
 /net/bmc-lab2/data/lab/sanchezrivera/your_folder_name
 5. config: set this to match up with your config file name with the prefix “./”
@@ -190,9 +190,25 @@ sbatch /net/bmc-lab2/data/lab/sanchezrivera/samgould/240624San/crispresso_analys
 
 After everything runs, you will have your processed data stored in the folder that you created:
 
-1. classification – contains information
-2. confusion_mats
-3. counts
-4. crispresso
+1. **classification** – contains information about the protospacer/barcode identification and sequencing quality in each sample
+
+| Column Name      | Description |
+| :---        |    :----:   | 
+| good quality      | # of reads above quality threshold       | 
+| low_qual_r1  | # of low quality R1 reads   (excluded)    |
+| low_qual_r2       | # of low quality R2 reads  (excluded)     | 
+| low_qual_r12   | # of low quality R1 and R2 reads (excluded)         |
+| no_match_bc     | # of good quality reads with no barcode match       | 
+| bc_identified  | # of good quality reads with barcode identified        |
+| proto_identified_perfect     | # of good quality reads with protospacer identified with NO mismatches       | 
+| proto_identified_imperfect   | # of good quality reads with protospacer identified with allowable number of mismatches        |
+| proto_identified_recombined      | # of good quality reads with protospacer identified BUT doesn't match up with barcode (recombined)     | 
+| no_match_proto   | # of good quality reads with no protospacer identified        |
+
+
+
+2. **confusion_mats** – a matrix showing the
+3. **counts** - 
+4. **crispresso** - 
 
 ## Addendum: MAGeCK

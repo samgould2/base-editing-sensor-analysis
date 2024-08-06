@@ -65,13 +65,24 @@ conda env list
 More info is available about troubleshooting conda environments at the [Luria website](https://igb.mit.edu/mini-courses/advanced-utilization-of-igb-computational-resources/package-management/conda-environments#sharing-conda-environments).
 
 
-# Step 0.1: 
+## Step 0.1: 
+
 
 
 | Syntax | Description |
 | --- | ----------- |
 
+- “gRNA_id”: a unique identifier for each guide RNA
+- “Protospacer”: G+19 protospacer, this includes the “G” start.
+- **Hamming_BC**: the 15 nt unique sensor barcode
+- **sensor_wt**: wildtype 42 nt sensor sequence
+- **sensor_alt**: correctly edited 42 nt sensor 
+
 
 ![Step 1](images/1.png)
 ![Step 2](images/2.png)
 ![Step 3](images/3.png)
+
+## Post-processing
+
+## Addendum: MAGeCK

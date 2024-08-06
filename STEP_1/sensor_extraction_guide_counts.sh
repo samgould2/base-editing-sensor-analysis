@@ -12,21 +12,24 @@ module load miniconda3/v4
 source /home/software/conda/miniconda3/bin/condainit
 
 #create a new virtual environment if needed; this one is fine from previously
-conda activate /home/samgould/.conda/envs/crispresso_env
+conda activate /home/samgould/.conda/envs/sensor_lib_sg
 
 #go to correct directory
 cd /net/bmc-lab2/data/lab/sanchezrivera/samgould/240624San
 
 #access the config file
-#config=./config.txt
-config=./sensor_extraction_fastq_split_config_DIEGO_IDR_v3_barcode.txt
+#NEED TO CHANGE THE CONFIG FILE FOR YOUR SPECIFIC RUN
+config=./DIEGO_IDR_CONFIG_MISMATCH_PIPELINE.txt
 
 # Extract R1_FILE name for the current $SLURM_ARRAY_TASK_ID
 R1_FILE=$(awk -v ArrayTaskID=$SLURM_ARRAY_TASK_ID '$1==ArrayTaskID {print $2}' $config)
 R2_FILE=$(awk -v ArrayTaskID=$SLURM_ARRAY_TASK_ID '$1==ArrayTaskID {print $3}' $config)
 folder_name=$(awk -v ArrayTaskID=$SLURM_ARRAY_TASK_ID '$1==ArrayTaskID {print $4}' $config)
 
-python3 crispresso_analysis_w_qwc_42nt.py IDR_ABE_library_columns_renamed.csv ${folder_name}
+# Paramters for the script (NO SPACES ALLOWED)
+splitby='protospacer'
+proto_mismatches_allowed=2
+bc_len=15
+sensor_len=42
 
-#test 
-#echo "This is array task ${SLURM_ARRAY_TASK_ID}, the sample name is ${R1_FILE} and ${R2_FILE} and the output folder is ${folder_name}" >> output.txt
+python3 sensor_extraction_guide_counts.py IDR_ABE_library_columns_renamed.csv ${R1_FILE} ${R2_FILE} ${splitby} ${proto_mismatches_allowed} ${bc_len} ${sensor_len} -o ${folder_name}

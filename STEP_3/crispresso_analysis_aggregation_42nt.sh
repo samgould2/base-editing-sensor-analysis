@@ -19,7 +19,7 @@ cd /net/bmc-lab2/data/lab/sanchezrivera/samgould/240624San
 
 #access the config file
 #config=./config.txt
-config=./sensor_extraction_fastq_split_config_DIEGO_IDR_v3_barcode.txt
+config=./DIEGO_IDR_CONFIG_MISMATCH_PIPELINE.txt
 
 # Extract R1_FILE name for the current $SLURM_ARRAY_TASK_ID
 #R1 and R2 File unnecessary here, but didn't want to change the config file

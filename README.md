@@ -86,6 +86,7 @@ e.g.:
 ``` 
 df.to_csv(‘config_file.txt’, sep= ‘ ’, index=False)
 ``` 
+**For more info see: pre_and_post_processing.ipynb**
 
 ### Library File: 
 
@@ -207,8 +208,41 @@ After everything runs, you will have your processed data stored in the folder th
 
 
 
-2. **confusion_mats** – a matrix showing the
-3. **counts** - 
-4. **crispresso** - 
+2. **confusion_mats** – a matrix showing the recombination events between protospacer and barcode (not super useful)
+3. **counts** - this contains the counts of protospacers and barcodes for each sample. The columns are:
+
+| Column Name      | Description |
+| :---        |    :----:   | 
+| Guide_ID      | Guide name       | 
+| sgRNA_no_Gstart  | protospacer    |
+| unique_BC       | barcode     | 
+| total_guide_count   | TOTAL protospacer count (regardless of recombination)         |
+| matched_guide_count     | Count for reads with matched protospacer-barcode pairs       | 
+| bc_count  | TOTAL barcode count (regardless of recombination)        |
+| duplicate_sgRNA     | TRUE/FALSE indicating whether the guide appears more than once in the library       | 
+
+- I reccomend running MAGeCK on either the **matched_guide_count** or the **bc_count**. The former is more stringent, the latter will have higher numbers generally.
+
+4. **crispresso** - This contains information about the sensor editing in each sample. I include a function in the **pre_and_post_processing.ipynb** for making this more useable. 
+
+**I HIGHLY RECCOMEND copying these csv files/folders to your local machine. DON'T COPY THE ENTIRE CRISPRESSO FOLDER; just take the .csv files from this folder**
 
 ## Addendum: MAGeCK
+
+We generally use MAGeCK for analyzing the dataset, normalizing readcounts, generating LFC and FDRs: https://sourceforge.net/p/mageck/wiki/Home/
+
+For getting the data in the correct format after performing the counts step, see **pre_and_post_processing.ipynb**. 
+
+Open a terminal in your desired folder where you want things saved (right click and select "New Terminal at Folder"). To run MAGeCK after you get everything set up, you can use something like the following command (there are many more options if you check the website). Obviously, change the guide_counts.txt file to your counts file:
+
+```
+source activate mageckenv
+
+mageck test -k /Users/samgould/Documents/GitHub/ondine-chromatin-be-sensor/MAGeCK/guide_counts.txt -t tf_rep1,tf_rep2,tf_rep3 -c t0_rep1,t0_rep2,t0_rep3 --normcounts-to-file -n ondine_analysis_mageck_chromatin
+
+```
+
+The names after "-t" correspond to the final time-point columns in the "guide_counts.txt" file, while the "-c" correspond to the control sample column names. In other words -t are the columns you're generating a LFC value for. Here we have 3 replicates; this will vary. Also change the value after "-n" to an appropriate name. 
+
+The most pertinent information will be in the **.sgrna_summary.txt** file that is output.
+

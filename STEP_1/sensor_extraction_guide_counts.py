@@ -160,7 +160,7 @@ def extraction_filtration(folder_name, input_df,R1_FILE,R2_FILE, bc_len, sensor_
         class_df.loc[quality_out, 'count']+=1
             
         if quality_out=='good quality':
-            proto = r2[:20]
+            proto = r2[:19]
             bc = r1[:bc_len]
 
 

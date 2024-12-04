@@ -27,7 +27,7 @@ for i, val in df.iterrows():
 
     #qwc is 5nt upstream and 5nt downstream of 20 nt guide sequence
     #default alignment parameters (60%)
-    p2 = f'--amplicon_seq {wt} --expected_hdr_amplicon_seq {edited} --guide_seq {proto} --quantification_window_coordinates 6-35,6-35 --exclude_bp_from_left 0 --exclude_bp_from_right 0 --base_editor_output --plot_window_size 15 --suppress_report --suppress_plots '
+    p2 = f'--amplicon_seq {wt} --expected_hdr_amplicon_seq {edited} --guide_seq {proto} --quantification_window_coordinates 6-35,6-35 --exclude_bp_from_left 0 --exclude_bp_from_right 0 --base_editor_output --plot_window_size 5 --suppress_report --suppress_plots '
     
     out_path = f"-o ./crispresso/{sample_name} -n {guide_id}"
 

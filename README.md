@@ -170,6 +170,12 @@ sbatch /net/bmc-lab2/data/lab/sanchezrivera/samgould/240624San/crispresso_analys
 
 **You will need to change the part after /sanchezrivera/ to match up with your file path.**
 
+**Note**: Sometimes, this script throws an error associated with permissions for reading/writing in folders. This can be fixed by running a command to allow read and write permission to the crispresso folder that you're saving data in. For example: 
+
+``` 
+chmod -R g+w /net/bmc-lab2/data/lab/sanchezrivera/samgould/cbems/241105San/crispresso
+```
+
 ## Step 3: Sensor analysis aggregation
 Same process as above. This part aggregates the crispresso data into a single dataframe for each sample. This time edit **crispresso_analysis_aggregtion.sh**:
 
